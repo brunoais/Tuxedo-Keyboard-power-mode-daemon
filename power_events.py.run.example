@@ -1,0 +1,12 @@
+--power-command-cwd
+/path/to/ryzenadj
+.
+--power-command
+./ryzenadj --slow-limit=14000
+tccPowerModeChange 'Powersave Extreme'
+--medium-power
+./ryzenadj --slow-limit=34000
+tccPowerModeChange 'Cool and breezy'
+--high-power
+./ryzenadj --slow-limit=54000
+tccPowerModeChange 'Default'
