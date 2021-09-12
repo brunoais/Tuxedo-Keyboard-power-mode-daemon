@@ -1,0 +1,22 @@
+[Unit]
+Description=PowerModes daemon
+
+[Service]
+Type=simple
+User=root
+Group=root
+Nice=-20
+
+RestartSec=5
+TimeoutSec=60
+RuntimeMaxSec=infinity
+Restart=always
+ExecStart=/usr/bin/python3 /usr/local/bin/power_events.py @/usr/local/bin/power_events.py.run
+PIDFile=/var/run/power_events.py
+
+StandardOutput=syslog
+StandardError=syslog
+
+
+[Install]
+WantedBy=multi-user.target
