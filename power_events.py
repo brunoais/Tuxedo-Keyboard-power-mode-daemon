@@ -27,7 +27,15 @@ def handler(signum, frame):
 # Set the signal handler and a 5-second alarm
 signal.signal(signal.SIGUSR1, handler)
 
-parser = argparse.ArgumentParser(fromfile_prefix_chars='@',
+class ArgumentParser(argparse.ArgumentParser):
+    def convert_arg_line_to_args(self, arg_line):
+        if arg_line.startswith('#'):
+            return []
+        if arg_line.startswith(' #'):
+            return [arg_line[1:]]
+        return [arg_line]
+
+parser = ArgumentParser(fromfile_prefix_chars='@',
                                  description='''
 Daemon to react to power mode changes from tuxedo-keyboard driver
 Program designed and only tested in Linux.
@@ -36,6 +44,9 @@ If you need to reload tuxedo drivers for any reason, just send a SIGUSR1 to this
 This program will close the file descriptor, backoff for 5 seconds and then connect again.
 
 The commands run by this program !!!WILL RUN AS ROOT!!! so be very careful which programs you set to run
+
+In the .run file with the command line options, you can use the hash ('#') character for comments.
+If you want to use '#' as an argument, just add a space before it. The space will be removed when parsing
 ''')
 
 
