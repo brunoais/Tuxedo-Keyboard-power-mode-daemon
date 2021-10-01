@@ -116,12 +116,12 @@ def low_power():
             print("Too many cwd for low power mode")
 
 def medium_power():
-    print("medium power: {}".format(args.high_power))
-    for command, cwd in zip_longest(args.high_power, args.high_power_cwd):
+    print("medium power: {}".format(args.medium_power))
+    for command, cwd in zip_longest(args.medium_power, args.medium_power_cwd):
         if command:
             subprocess.call(command.format("1"), cwd=cwd, shell=True)
         else:
-            print("Too many cwd for low power mode")
+            print("Too many cwd for medium power mode")
 
 def high_power():
     print("high power: {}".format(args.high_power))
@@ -129,7 +129,7 @@ def high_power():
         if command:
             subprocess.call(command.format("2"), cwd=cwd, shell=True)
         else:
-            print("Too many cwd for low power mode")
+            print("Too many cwd for high power mode")
 
 POWER_SETTING_OPERATIONS = {
     0: low_power,
